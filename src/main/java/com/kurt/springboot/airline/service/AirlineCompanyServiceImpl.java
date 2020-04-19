@@ -6,16 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AirlineCompanyServiceImpl implements AirlineCompanyService {
 
-    private AirlineCompanyRepository airlineCompanyRepository;
-
     @Autowired
-    public AirlineCompanyServiceImpl(AirlineCompanyRepository theAirlineCompanyRepository) {
-        airlineCompanyRepository = theAirlineCompanyRepository;
-    }
+    private AirlineCompanyRepository airlineCompanyRepository;
 
     @Override
     public List<AirlineCompany> findAll() {
@@ -23,17 +20,17 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
     }
 
     @Override
-    public AirlineCompany findById(int theId) {
-        return null;
+    public Optional<AirlineCompany> findById(Long theId) {
+        return airlineCompanyRepository.findById(theId);
     }
 
     @Override
-    public void save(AirlineCompany theAirlineCompany) {
-
+    public AirlineCompany save(AirlineCompany theAirlineCompany) {
+        return airlineCompanyRepository.save(theAirlineCompany);
     }
 
     @Override
-    public void deleteById(int theId) {
-
+    public void deleteById(Long theId) {
+        airlineCompanyRepository.deleteById(theId);
     }
 }

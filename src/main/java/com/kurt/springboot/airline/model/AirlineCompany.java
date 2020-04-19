@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @Data
@@ -24,6 +23,6 @@ public class AirlineCompany {
     private String postCode;
 
     @OneToMany(mappedBy = "airlineCompany")
-    private Set<Flight> flights;
+    private List<Flight> flights;
 
 }
