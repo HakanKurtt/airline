@@ -36,6 +36,21 @@ public class AirlineCompanyController {
         return result;
     }
 
+    @GetMapping("/airlineCompany")
+    public Optional<AirlineCompany> getCompanyByName(@RequestParam String name) {
+        Optional<AirlineCompany> result = airlineCompanyService.findByName(name);
+
+        AirlineCompany airlineCompany = null;
+
+        if (result.isPresent()) {
+            airlineCompany = result.get();
+        } else {
+            throw new ResourceNotFoundException();
+        }
+
+        return result;
+    }
+
     @PostMapping("/airlineCompany")
     public AirlineCompany save(@RequestBody AirlineCompany airlineCompany) {
         airlineCompany.setId(null);
