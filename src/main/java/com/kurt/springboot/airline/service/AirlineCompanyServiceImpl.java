@@ -25,6 +25,11 @@ public class AirlineCompanyServiceImpl implements AirlineCompanyService {
     }
 
     @Override
+    public Optional<AirlineCompany> findByName(String name) {
+        return airlineCompanyRepository.findByName(name);
+    }
+
+    @Override
     public AirlineCompany save(AirlineCompany theAirlineCompany) {
         return airlineCompanyRepository.save(theAirlineCompany);
     }

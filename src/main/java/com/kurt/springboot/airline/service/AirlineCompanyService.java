@@ -7,11 +7,13 @@ import java.util.Optional;
 
 public interface AirlineCompanyService {
 
-    public List<AirlineCompany> findAll();
+    List<AirlineCompany> findAll();
 
-    public Optional<AirlineCompany> findById(Long theId);
+    Optional<AirlineCompany> findById(Long theId);
 
-    public AirlineCompany save(AirlineCompany theAirlineCompany);
+    Optional<AirlineCompany> findByName(String name);
 
-    public void deleteById(Long theId);
+    AirlineCompany save(AirlineCompany theAirlineCompany);
+
+    void deleteById(Long theId);
 }
