@@ -1,5 +1,6 @@
 package com.kurt.springboot.airline.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,8 @@ public class Ticket {
     private boolean isSold = false;
     private boolean isCancelled = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "flight_id")
+    @JsonIgnore
     private Flight flight;
 }

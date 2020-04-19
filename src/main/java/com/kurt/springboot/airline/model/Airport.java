@@ -22,6 +22,6 @@ public class Airport {
     private String country;
     private String postCode;
 
-    @OneToMany
+    @OneToMany(mappedBy = "airlineCompany")
     private List<Flight> flights;
 }

@@ -1,9 +1,11 @@
 package com.kurt.springboot.airline.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,26 +18,23 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue
-    private int flightNo;
+    private String flightNo;
 
-    private int numberOfSeats = 75;
-    private int numberOfAvailableSeats = 0;
+    private int numberOfSeats;
+    private int numberOfAvailableSeats;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "airline_company_id")
+    @JsonIgnore
     private AirlineCompany airlineCompany;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToMany(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    private Airport airport;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    private Route route;
-
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
     private List<Ticket> ticketList;
+
+    @Transient
+    @JsonIgnore
+    private BigDecimal defaultTicketPrice = new BigDecimal(1000.00);
 
 }
